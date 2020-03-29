@@ -28,4 +28,12 @@ func main() {
 	// Creating an instance using the pointer address operator
 	var monkey = &Animal{name: "Monkey", weight: 10}
 	fmt.Println(monkey)
+
+	// Comparing struct instances
+	fmt.Println(bird == monkey)
+
+	// Copying struct type using pointer reference
+	monkey2 := monkey
+	monkey2.name = "Monkey2"
+	fmt.Println(monkey2)
 }
