@@ -2,7 +2,9 @@ package main
 
 import "testing"
 
+// Testing function
 func TestHello(t *testing.T) {
+	// Add a test case
 	t.Run("saying hello to people", func(t *testing.T) {
 		got := Hello("Gabriel")
 		want := "Hello Gabriel"
@@ -12,6 +14,7 @@ func TestHello(t *testing.T) {
 		}
 	})
 
+	// Add a test case
 	t.Run("Say Hello World!", func(t *testing.T) {
 		got := Hello("World!")
 		want := "Hello World!"
