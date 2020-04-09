@@ -1,6 +1,7 @@
 package Fibonacci
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -40,4 +41,19 @@ func TestRecusiveFibonacci(t *testing.T) {
 			t.Errorf("got %q want %q", got, want)
 		}
 	})
+}
+
+func TestFibonacciSequence(t *testing.T) {
+	data := []struct {
+		n    int
+		want []int
+	}{
+		{0, []int{0}}, {1, []int{0, 1}}, {2, []int{0, 1, 1}}, {3, []int{0, 1, 1, 2}},
+	}
+
+	for _, d := range data {
+		if got := fibonacciSequence(d.n); !reflect.DeepEqual(got, d.want) {
+			t.Errorf("Invalid Fibonacci value for N: %d, got: %d, want: %d", d.n, got, d.want)
+		}
+	}
 }
