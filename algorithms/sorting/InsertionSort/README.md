@@ -18,4 +18,4 @@ Insertion sort is a simple sorting algorithm that builds the final sorted array 
 
 ## References
 
-[Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)
+* [Wikipedia](https://en.wikipedia.org/wiki/Insertion_sort)
