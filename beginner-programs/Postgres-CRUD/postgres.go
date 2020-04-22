@@ -26,6 +26,7 @@ type Book struct {
 	Pages           int
 }
 
+// Create the books table in the database
 func createTable() {
 	query := `
 	CREATE TABLE books
@@ -48,6 +49,7 @@ func createTable() {
 	}
 }
 
+// Drop the book table from the database
 func dropTable() {
 	query := `DROP TABLE books;`
 
@@ -56,6 +58,7 @@ func dropTable() {
 	}
 }
 
+// Get a specific book using the book id
 func getBook(bookID int) (Book, error) {
 	res := Book{}
 
@@ -73,6 +76,7 @@ func getBook(bookID int) (Book, error) {
 	return res, err
 }
 
+// Get all books from the database
 func getAllBooks() ([]Book, error) {
 	books := []Book{}
 
@@ -105,6 +109,7 @@ func getAllBooks() ([]Book, error) {
 	return books, err
 }
 
+// Insert a book into the database
 func insertBook(name, author string, pages int, publicationDate time.Time) (int, error) {
 	var bookID int
 	err := db.QueryRow(`INSERT INTO books(name, author, pages, publication_date) VALUES($1, $2, $3, $4) RETURNING id`, name, author, pages, publicationDate).Scan(&bookID)
@@ -117,6 +122,7 @@ func insertBook(name, author string, pages int, publicationDate time.Time) (int,
 	return bookID, err
 }
 
+// Update a book in the database
 func updateBook(id int, name, author string, pages int, publicationDate time.Time) (int, error) {
 	res, err := db.Exec(`UPDATE books set name=$1, author=$2, pages=$3, publication_date=$4 where id=$5 RETURNING id`, name, author, pages, publicationDate, id)
 	if err != nil {
@@ -131,6 +137,7 @@ func updateBook(id int, name, author string, pages int, publicationDate time.Tim
 	return int(rowsUpdated), err
 }
 
+// Remove a book from the database
 func removeBook(bookID int) (int, error) {
 	res, err := db.Exec(`delete from books where id = $1`, bookID)
 	if err != nil {
