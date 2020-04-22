@@ -155,17 +155,20 @@ func removeBook(bookID int) (int, error) {
 var db *sql.DB
 
 func main() {
+	// Database connection string
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
 
 	var err error
+
+	// Connect to the database
 	db, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		panic(err)
 	}
-	// defer db.Close()
 
+	// Check the database connection
 	err = db.Ping()
 	if err != nil {
 		panic(err)
