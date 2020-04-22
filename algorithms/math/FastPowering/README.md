@@ -2,7 +2,6 @@
 
 **The power of a number** says how many times to use the number in a multiplication.
 
-
 ## Naive Algorithm Complexity
 
 To find `a` raised to the power `b` we multiply `a` to itself, `b` times. That is, `a^b = a * a * a * ... * a` (`b` occurrences of `a`).
@@ -24,8 +23,7 @@ X^Y = X^(Y/2) * X^(Y/2)
 For **odd** `Y`:
 
 ```text
-X^Y = X^(Y//2) * X^(Y//2) * X
-where Y//2 is result of division of Y by 2 without reminder.
+X^Y = X^(Y/2) * X^(Y/2) * X
 ```
 
 **For example**
