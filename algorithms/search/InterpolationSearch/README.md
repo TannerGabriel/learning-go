@@ -24,6 +24,10 @@ hi - Ending index in arr[]
 
 **Time complexity**: `O(log(log(n))`
 
+## Implementation
+
+- [Interpolation Search](https://github.com/TannerGabriel/learning-go/blob/master/algorithms/search/InterpolationSearch/interpolationsearch.go)
+
 ## References
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Interpolation_search)
