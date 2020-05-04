@@ -23,7 +23,6 @@ const collName = "todolist"
 var collection *mongo.Collection
 
 func init() {
-
 	// Set client options
 	clientOptions := options.Client().ApplyURI(connectionString)
 
@@ -48,18 +47,26 @@ func init() {
 	fmt.Println("Collection instance created!")
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+    (*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+    (*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
+
+
 func GetAllTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	setupResponse(&w, r)
 	payload := getAllTask()
 	json.NewEncoder(w).Encode(payload)
 }
 
 func CreateTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setupResponse(&w, r)
+	if (*r).Method == "OPTIONS" {
+		return
+	}
+
+
 	var task models.ToDoList
 	_ = json.NewDecoder(r.Body).Decode(&task)
 	insertOneTask(task)
@@ -67,10 +74,7 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func TaskComplete(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "PUT")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setupResponse(&w, r)
 
 	params := mux.Vars(r)
 	taskComplete(params["id"])
@@ -78,10 +82,7 @@ func TaskComplete(w http.ResponseWriter, r *http.Request) {
 }
 
 func UndoTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "PUT")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setupResponse(&w, r)
 
 	params := mux.Vars(r)
 	undoTask(params["id"])
@@ -89,18 +90,16 @@ func UndoTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	setupResponse(&w, r)
+
 	params := mux.Vars(r)
 	deleteOneTask(params["id"])
 	json.NewEncoder(w).Encode(params["id"])
 }
 
 func DeleteAllTask(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	setupResponse(&w, r)
+
 	count := deleteAllTask()
 	json.NewEncoder(w).Encode(count)
 }
