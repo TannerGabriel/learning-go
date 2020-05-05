@@ -6,9 +6,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"../models"
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -16,13 +18,22 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const connectionString = "mongodb://localhost:27017"
 const dbName = "test"
 const collName = "todolist"
 
 var collection *mongo.Collection
 
 func init() {
+	var connectionString string
+
+	// Get environment variable for connection string
+	host := goDotEnvVariable("HOST")
+	if "" == host {
+		connectionString = "mongodb://localhost:27017"
+	} else {
+		connectionString = "mongodb://" + host + ":27017"
+	}
+
 	// Set client options
 	clientOptions := options.Client().ApplyURI(connectionString)
 
@@ -47,12 +58,21 @@ func init() {
 	fmt.Println("Collection instance created!")
 }
 
-func setupResponse(w *http.ResponseWriter, req *http.Request) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-    (*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-    (*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+func goDotEnvVariable(key string) string {
+	err := godotenv.Load()
+
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
+	return os.Getenv(key)
 }
 
+func setupResponse(w *http.ResponseWriter, req *http.Request) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+}
 
 func GetAllTask(w http.ResponseWriter, r *http.Request) {
 	setupResponse(&w, r)
@@ -65,7 +85,6 @@ func CreateTask(w http.ResponseWriter, r *http.Request) {
 	if (*r).Method == "OPTIONS" {
 		return
 	}
-
 
 	var task models.ToDoList
 	_ = json.NewDecoder(r.Body).Decode(&task)
