@@ -29,24 +29,6 @@ func main() {
 		m.Respond([]byte("answer is 42"))
 	})
 
-	// Simple Sync Subscriber
-	// sub, _ := nc.SubscribeSync("foo")
-	// timeout, _ := time.ParseDuration("30s")
-	// m, _ := sub.NextMsg(timeout)
-	// fmt.Println(m)
-
-	// // Channel Subscriber
-	// ch := make(chan *nats.Msg, 64)
-	// sub, _ := nc.ChanSubscribe("foo", ch)
-	// msg := <-ch
-	// fmt.Println(msg)
-
-	// Unsubscribe
-	// sub.Unsubscribe()
-
-	// Drain
-	// sub.Drain()
-
 	// Replies
 	nc.Subscribe("help", func(m *nats.Msg) {
 		nc.Publish(m.Reply, []byte("I can help!"))
@@ -57,7 +39,6 @@ func main() {
 	fmt.Printf("Msg received on [%s] : %s\n", msg.Subject, string(msg.Data))
 
 	// Drain connection (Preferred for responders)
-	// Close() not needed if this is called.
 	nc.Drain()
 
 	// Close connection
