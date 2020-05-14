@@ -86,6 +86,25 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
   * [Hamming Distance](algorithms/string/HammingDistance) 
   * [Levenshtein Distance](algorithms/string/LevenshteinDistance)
 
+## Data Structures
+
+* [LinkedList](data-structures/LinkedList)
+
+## Begginer Programs
+
+* [Email Validator](beginner-programs/Email-Validator)
+* [File Upload](beginner-programs/FileUpload)
+* [Job Scheduling](beginner-programs/JobScheduling)
+* [MongoDB CRUD](beginner-programs/MongoDB-CRUD)
+* [MySQL CRUD](beginner-programs/MySQL-CRUD)
+* [Nats Connection Example](beginner-programs/NatsConnectionExample)
+* [Postgres CRUD](beginner-programs/Postgres-CRUD)
+* [Pyramid of Stars](beginner-programs/PyramidOfStars)
+* [Random Password Generator](beginner-programs/RandomPasswordGenerator)
+* [Scanner](beginner-programs/Scanner)
+* [Todo List](beginner-programs/Todo-List)
+* [Webscraper](beginner-programs/WebScraper)
+
 ## Author
 
 [Gabriel Tanner](https://gabrieltanner.org/)
