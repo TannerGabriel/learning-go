@@ -67,6 +67,24 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
   * [Radian & Degree](algorithms/math/Radian)
   * [Fast Powering](algorithms/math/FastPowering)
   * [Square Root](algorithms/math/SquareRoot)
+* **Search**
+  * [Binary Search](algorithms/search/BinarySearch) 
+  * [Interpolation Search](algorithms/search/InterpolationSearch) 
+  * [Jump Search](algorithms/search/JumpSearch) 
+  * [Linear Search](algorithms/search/LinearSearch) 
+* **Sorting**
+  * [Bubble Sort](algorithms/sorting/BubbleSort) 
+  * [Counting Sort](algorithms/sorting/CountingSort) 
+  * [Heap Sort](algorithms/sorting/HeapSort) 
+  * [Insertion Sort](algorithms/sorting/InsertionSort) 
+  * [Merge Sort](algorithms/sorting/MergeSort) 
+  * [Quick Sort](algorithms/sorting/QuickSort) 
+  * [Radix Sort](algorithms/sorting/RadixSort) 
+  * [Selection Sort](algorithms/sorting/SelectionSort) 
+  * [Shell Sort](algorithms/sorting/ShellSort) 
+* **String**
+  * [Hamming Distance](algorithms/string/HammingDistance) 
+  * [Levenshtein Distance](algorithms/string/LevenshteinDistance)
 
 ## Author
 
