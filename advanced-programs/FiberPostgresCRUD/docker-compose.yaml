@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: db
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: pq-demo
+    ports:
+      - "5432:5432"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:5432"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+  golang:
+    build:
+        context: ./
+        dockerfile: Dockerfile
+    container_name: golang
+    restart: always
+    ports:
+        - '3000:3000'
+    depends_on: [db]
