@@ -54,6 +54,20 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 18. [Testing](https://github.com/TannerGabriel/learning-go/tree/master/basics/18-Testing)
 19. [Webserver](https://github.com/TannerGabriel/learning-go/blob/master/basics/19-Webserver/Server.go)
 
+## Algorithms
+
+* **Math**
+  * [Factorial](algorithms/math/Factorial) 
+  * [Fibonacci Number](algorithms/math/Fibonacci)
+  * [Primality Test](algorithms/math/PrimalityTest)
+  * [Euclidean Algorithm](algorithms/math/EuclideanAlgorithm)
+  * [Sieve of Eratosthenes](algorithms/math/SieveOfEratosthenes)
+  * [Is Power of Two](algorithms/math/IsPowerOfTwo)
+  * [Pascal's Triangle](algorithms/math/PascalTriangle)
+  * [Radian & Degree](algorithms/math/Radian)
+  * [Fast Powering](algorithms/math/FastPowering)
+  * [Square Root](algorithms/math/SquareRoot)
+
 ## Author
 
 [Gabriel Tanner](https://gabrieltanner.org/)
