@@ -2,8 +2,8 @@
 
 Learning Golang provides hand-on examples, sample algorithm implementations, and real-world application examples for learning the basic and advanced features of the Go programming language. 
 
-* [Basics](##Basics)
-* [Algorithms](##Algorithms)
+* [Basics](#Basics)
+* [Algorithms](#Algorithms)
 * [Data Structures](#Data-Structures)
 * [Beginner Programs](#Beginner-Programs)
 
