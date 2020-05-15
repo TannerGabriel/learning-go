@@ -10,7 +10,7 @@ import (
 type Item struct {
 	gorm.Model
 	Title  string `json:"title"`
-	Author string `json:"author"`
+	Owner  string `json:"owner"`
 	Rating int    `json:"rating"`
 }
 
