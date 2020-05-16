@@ -5,7 +5,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/tannergabriel/learning-go/advanced-programs/gRPC-Example/chat"
+	"github.com/tannergabriel/learning-go/beginner-programs/gRPC-Example/chat"
 	"google.golang.org/grpc"
 )
 

@@ -1,4 +1,4 @@
-module github.com/tannergabriel/learning-go/advanced-programs/gRPC-Example
+module github.com/tannergabriel/learning-go/beginner-programs/gRPC-Example
 
 go 1.13
 
