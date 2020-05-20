@@ -110,6 +110,12 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 * [Todo List](beginner-programs/Todo-List)
 * [Webscraper](beginner-programs/WebScraper)
 
+## Advanced Programs
+
+* [Fiber Postgres CRUD](advanced-programs/FiberPostgresCRUD)
+* [Tello Drone](advanced-programs/TelloDrone)
+
+
 ## Author
 
 [Gabriel Tanner](https://gabrieltanner.org/)
