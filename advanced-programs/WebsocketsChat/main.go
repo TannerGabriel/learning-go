@@ -1,19 +1,21 @@
 package main
 
 import (
-	"net/http"
-
+	static "github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/olahol/melody.v1"
 )
+
+type Message struct {
+	Username string `json:"username"`
+	Content  string `json:"content"`
+}
 
 func main() {
 	r := gin.Default()
 	m := melody.New()
 
-	r.GET("/", func(c *gin.Context) {
-		http.ServeFile(c.Writer, c.Request, "index.html")
-	})
+	r.Use(static.Serve("/", static.LocalFile("./public", true)))
 
 	r.GET("/ws", func(c *gin.Context) {
 		m.HandleRequest(c.Writer, c.Request)
