@@ -41,7 +41,7 @@ func listen(uri *url.URL, topic string) {
 }
 
 func main() {
-	uri, err := url.Parse("tcp://10.0.0.8:1883")
+	uri, err := url.Parse("tcp://10.0.0.22:1883")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,11 +52,12 @@ func main() {
 	client := connect("pub", uri)
 	timer := time.NewTicker(1 * time.Second)
 	for t := range timer.C {
+		fmt.Println(t)
 		var min int64 = 10
 		var max int64 = 100
 		var random int64 = (rand.Int63n(max-min) + min)
 		nsec := time.Now().UnixNano()
 		payload := "weather,location=us-midwest temperature=" + strconv.FormatInt(random, 10) + " " + strconv.FormatInt(nsec, 10)
-		client.Publish(topic, 0, false, payload)
+		client.Publish("sensors", 0, false, payload)
 	}
 }

@@ -61,16 +61,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
     Serial.print((char)payload[i]);
   }
   Serial.println();
-
-  // Switch on the LED if an 1 was received as first character
-  if ((char)payload[0] == '1') {
-    digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
-    // but actually the LED is on; this is because
-    // it is active low on the ESP-01)
-  } else {
-    digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
-  }
-
 }
 
 void reconnect() {
@@ -98,7 +88,6 @@ void reconnect() {
 }
 
 void setup() {
-  pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   Serial.begin(9600);
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -110,30 +99,14 @@ void setup() {
   }
 
   timeClient.begin();
-  // Set offset time in seconds to adjust for your timezone, for example:
-  // GMT +1 = 3600
-  // GMT +8 = 28800
-  // GMT -1 = -3600
-  // GMT 0 = 0
   timeClient.setTimeOffset(3600);
 }
 
 void loop() {
-
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
-
-  unsigned long now = millis();
-  if (now - lastMsg > 2000) {
-    lastMsg = now;
-    ++value;
-    snprintf (msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    client.publish("outTopic", msg);
-  }
 
   while (Serial.available() > 0) {
     char c = Serial.read();
@@ -151,16 +124,13 @@ void loop() {
     timeClient.forceUpdate();
   }
 
-  unixtime = timeClient.getEpochTime() * 1000000000;
-  Serial.println(unixtime);
+  unixtime = timeClient.getEpochTime();
 
-  // uint32_t unixTime = time.unixtime();
   float objt = tmp006.readObjTempC();
-  Serial.print("Object Temperature: "); Serial.print(objt); Serial.println("*C");
-  float diet = tmp006.readDieTempC();
-  Serial.print("Die Temperature: "); Serial.print(diet); Serial.println("*C");
-  Serial.print("Timestamp: "); Serial.println(unixtime);
-  snprintf (msg, MSG_BUFFER_SIZE, "weather,location=us-midwest temperature=%ld %ld", objt, unixtime);
+
+  String message = String("weather,location=us-midwest temperature="+String(objt) + " " + String(unixtime) + "0000000000");
+  message.toCharArray(msg, message.length());
+  Serial.println(msg);
   client.publish("sensors", msg);
-  delay(4000); 
+  delay(1000); 
 }
