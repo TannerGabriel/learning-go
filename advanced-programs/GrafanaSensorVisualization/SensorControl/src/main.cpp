@@ -17,10 +17,10 @@ const char* mqtt_server = "10.0.0.22";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
-unsigned long lastMsg = 0;
+
+// Create variable to hold mqtt messages
 #define MSG_BUFFER_SIZE	(100)
 char msg[MSG_BUFFER_SIZE];
-int value = 0;
 
 // Define NTP Client to get time
 WiFiUDP ntpUDP;
@@ -29,10 +29,10 @@ NTPClient timeClient(ntpUDP);
 // Variables to save date and time
 uint32_t unixtime;
 
+// Connecting to the WIFI network
 void setup_wifi() {
-
   delay(10);
-  // We start by connecting to a WiFi network
+  
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -51,16 +51,6 @@ void setup_wifi() {
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-}
-
-void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
 }
 
 void reconnect() {
@@ -89,48 +79,45 @@ void reconnect() {
 
 void setup() {
   Serial.begin(9600);
+  
   setup_wifi();
+
   client.setServer(mqtt_server, 1883);
-  client.setCallback(callback);
 
   if (! tmp006.begin()) {
     Serial.println("No sensor found");
     while (1);
   }
 
+  // Start the time client with an offset of 3600 seconds (+1 hours timezone)
   timeClient.begin();
   timeClient.setTimeOffset(3600);
 }
 
 void loop() {
+  // Connect to the mqtt client
   if (!client.connected()) {
     reconnect();
   }
   client.loop();
 
-  while (Serial.available() > 0) {
-    char c = Serial.read();
-    if (c == 'w') {
-      Serial.println("Waking up!");
-      tmp006.wake();
-    }
-    else if (c == 's') {
-      Serial.println("Going to sleep!");
-      tmp006.sleep();
-    }
-  }
-
+  // Update the time client for the timestamps
   while(!timeClient.update()) {
     timeClient.forceUpdate();
   }
 
+  // Get the unix timestamp
   unixtime = timeClient.getEpochTime();
 
+  // Get the current object temperatur of the sensor
   float objt = tmp006.readObjTempC();
 
+  // Create the message that will be send using mqtt
   String message = String("weather,location=us-midwest temperature="+String(objt) + " " + String(unixtime) + "0000000000");
   message.toCharArray(msg, message.length());
   Serial.println(msg);
+
+  // Send the message on the sensors topic
   client.publish("sensors", msg);
   delay(1000); 
 }
