@@ -1,6 +1,8 @@
 package graph
 
-import "github.com/tannergabriel/learning-go/advanced-programs/GraphQL-CRUD/graph/model"
+import (
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+)
 
 //go:generate go run github.com/99designs/gqlgen
 
@@ -9,5 +11,4 @@ import "github.com/tannergabriel/learning-go/advanced-programs/GraphQL-CRUD/grap
 // It serves as dependency injection for your app, add any dependencies you require here.
 
 type Resolver struct {
-	items []*model.Item
 }
