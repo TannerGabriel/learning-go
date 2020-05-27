@@ -1,4 +1,4 @@
-module github.com/tannergabriel/advanced-programs/TelloDrone
+module github.com/tannergabriel/learning-go/advanced-programs/TelloDrone
 
 go 1.13
 

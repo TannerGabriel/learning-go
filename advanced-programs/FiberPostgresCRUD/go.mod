@@ -1,4 +1,4 @@
-module github.com/tannergabriel/advanced-programs/FiberPostgresCRUD
+module github.com/tannergabriel/learning-go/advanced-programs/FiberPostgresCRUD
 
 go 1.13
 

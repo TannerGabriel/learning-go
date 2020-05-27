@@ -1,4 +1,4 @@
-module github.com/tannergabriel/advanced-programs/WebsocketsChat
+module github.com/tannergabriel/learning-go/advanced-programs/WebsocketsChat
 
 go 1.13
 

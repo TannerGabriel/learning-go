@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber"
-	"github.com/tannergabriel/advanced-programs/FiberPostgresCRUD/database"
-	"github.com/tannergabriel/advanced-programs/FiberPostgresCRUD/item"
+	"github.com/tannergabriel/learning-go/advanced-programs/FiberPostgresCRUD/database"
+	"github.com/tannergabriel/learning-go/advanced-programs/FiberPostgresCRUD/item"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

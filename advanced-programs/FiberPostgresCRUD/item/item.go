@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
-	"github.com/tannergabriel/advanced-programs/FiberPostgresCRUD/database"
+	"github.com/tannergabriel/learning-go/advanced-programs/FiberPostgresCRUD/database"
 )
 
 type Item struct {
