@@ -5,29 +5,23 @@ package graph
 
 import (
 	"context"
-	"fmt"
-	"math/rand"
 
-	"github.com/tannergabriel/advanced-programs/GraphQL-CRUD/graph/generated"
-	"github.com/tannergabriel/advanced-programs/GraphQL-CRUD/graph/model"
+	"github.com/tannergabriel/learning-go/advanced-programs/GraphQL-CRUD/graph/generated"
+	"github.com/tannergabriel/learning-go/advanced-programs/GraphQL-CRUD/graph/model"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	todo := &model.Todo{
-		Text:   input.Text,
-		ID:     fmt.Sprintf("T%d", rand.Intn(10000)),
-		UserID: input.UserID,
+func (r *mutationResolver) CreateItems(ctx context.Context, input model.NewItem) (*model.Item, error) {
+	item := &model.Item{
+		Title:  input.Title,
+		Owner:  input.Owner,
+		Rating: input.Rating,
 	}
-	r.todos = append(r.todos, todo)
-	return todo, nil
+	r.items = append(r.items, item)
+	return item, nil
 }
 
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	return r.todos, nil
-}
-
-func (r *todoResolver) User(ctx context.Context, obj *model.Todo) (*model.User, error) {
-	return &model.User{ID: obj.UserID, Name: "user " + obj.UserID}, nil
+func (r *queryResolver) Items(ctx context.Context) ([]*model.Item, error) {
+	return r.items, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
@@ -36,9 +30,5 @@ func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResol
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
-// Todo returns generated.TodoResolver implementation.
-func (r *Resolver) Todo() generated.TodoResolver { return &todoResolver{r} }
-
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
-type todoResolver struct{ *Resolver }
