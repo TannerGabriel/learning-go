@@ -114,6 +114,9 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 
 * [Fiber Postgres CRUD](advanced-programs/FiberPostgresCRUD)
 * [Tello Drone](advanced-programs/TelloDrone)
+* [Grafana Sensor Visualization](advanced-programs/GrafanaSensorVisualization)
+* [GraphQL-CRUD](advanced-programs/GraphQL-CRUD)
+* [Websockets Chat](advanced-programs/WebsocketsChat)
 
 
 ## Author
