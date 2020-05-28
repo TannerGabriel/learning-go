@@ -9,7 +9,7 @@ func main() {
 	// Choose auth method and set it up
 	auth := smtp.PlainAuth("", "email", "password", "smtp-client")
 
-	// Here we do it all: connect to our server, set up a message and send it
+	// Email details
 	from := "email"
 	to := "email"
 	subject := "Hello there!"

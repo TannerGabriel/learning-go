@@ -109,6 +109,7 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 * [Scanner](beginner-programs/Scanner)
 * [Todo List](beginner-programs/Todo-List)
 * [Webscraper](beginner-programs/WebScraper)
+* [Sending an Email over SMTP](beginner-programs/SendEmail)
 
 ## Advanced Programs
 
