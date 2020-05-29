@@ -32,7 +32,8 @@ export default {
   name: 'Main',
   data: function () {
     return {
-      todos: [] 
+      todos: [],
+      baseURL: `http://${process.env.VUE_APP_API_URL}:3000/` || 'http://localhost:3000/' 
     }
   },
   beforeMount(){
@@ -41,25 +42,25 @@ export default {
   methods: {
     addTodo: async function () {
       const element = document.getElementById("todo-input");
-      axios.post('http://localhost:3000/todo', {
+      axios.post(`${this.baseURL}todo`, {
         task: element.value
       })   
       this.todos.push({task: element.value})  
     },
     removeTodo: function(id) {
-      axios.delete(`http://localhost:3000/todo/deleteTask/${id}`, () => {})   
+      axios.delete(`${this.baseURL}todo/deleteTask/${id}`, () => {})   
       const index = this.todos.findIndex(x => x._id === id)
       this.todos.splice(index, 1);
     },
     changeStatus: function(id, status) {
       if(status == true) {
-        axios.put(`http://localhost:3000/todo/undoTask/${id}`, () => {}) 
+        axios.put(`${this.baseURL}todo/undoTask/${id}`, () => {}) 
       } else {
-        axios.put(`http://localhost:3000/todo/${id}`, () => {}) 
+        axios.put(`${this.baseURL}todo/${id}`, () => {}) 
       }
     },
     getTodos: async function(){
-      const todos = await axios.get('http://localhost:3000/todo')
+      const todos = await axios.get(`${this.baseURL}todo`)
       todos.data.forEach(element => {
         this.todos.push(element)
       });

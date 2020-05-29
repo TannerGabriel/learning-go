@@ -8,6 +8,9 @@ COPY package*.json ./
 
 RUN npm install
 
+ARG VUE_APP_API_URL
+ENV VUE_APP_API_URL $VUE_APP_API_URL
+
 COPY . .
 
 RUN npm run build

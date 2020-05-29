@@ -21,6 +21,8 @@ services:
         build:
             context: ./frontend/
             dockerfile: Dockerfile
+            args: 
+                - VUE_APP_API_URL=${EXTERNAL_IP}
         container_name: frontend
         restart: always
         ports:
