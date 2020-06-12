@@ -5,15 +5,13 @@
 #include <PubSubClient.h>
 #include <Adafruit_Sensor.h>
 #include "Adafruit_TMP006.h"
-#include <NTPClient.h>
-#include <WiFiUdp.h>
 
 Adafruit_TMP006 tmp006;
 
 // Update these with values suitable for your network.
 const char* ssid = "ssid";
 const char* password = "password";
-const char* mqtt_server = "10.0.0.22";
+const char* mqtt_server = "server_ip";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -21,13 +19,6 @@ PubSubClient client(espClient);
 // Create variable to hold mqtt messages
 #define MSG_BUFFER_SIZE	(100)
 char msg[MSG_BUFFER_SIZE];
-
-// Define NTP Client to get time
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
-
-// Variables to save date and time
-uint32_t unixtime;
 
 // Connecting to the WIFI network
 void setup_wifi() {
@@ -88,10 +79,6 @@ void setup() {
     Serial.println("No sensor found");
     while (1);
   }
-
-  // Start the time client with an offset of 3600 seconds (+1 hours timezone)
-  timeClient.begin();
-  timeClient.setTimeOffset(3600);
 }
 
 void loop() {
@@ -101,23 +88,16 @@ void loop() {
   }
   client.loop();
 
-  // Update the time client for the timestamps
-  while(!timeClient.update()) {
-    timeClient.forceUpdate();
-  }
-
-  // Get the unix timestamp
-  unixtime = timeClient.getEpochTime();
-
   // Get the current object temperatur of the sensor
   float objt = tmp006.readObjTempC();
 
   // Create the message that will be send using mqtt
-  String message = String("weather,location=us-midwest temperature="+String(objt) + " " + String(unixtime) + "0000000000");
+  String message = String("weather,location=us temperature="+String(objt));
   message.toCharArray(msg, message.length());
   Serial.println(msg);
 
   // Send the message on the sensors topic
   client.publish("sensors", msg);
+
   delay(1000); 
 }
