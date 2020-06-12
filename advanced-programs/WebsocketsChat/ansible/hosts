@@ -1,0 +1,10 @@
+[webserver]
+localhost
+ 
+[all:vars]
+ansible_connection=ssh
+ansible_user=user
+ansible_ssh_pass=userpassword
+
+[webserver:vars]
+ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,43 @@
+---
+    - hosts: webserver
+      remote_user: user
+      become: yes
+      become_method: sudo
+      tasks:
+        - name: Install pip
+          apt: name=python-pip state=present
+      
+        - name: Install docker-py
+          pip: name=docker-py        
+        
+        - name: Copy project files to server
+          copy:
+            src: ../
+            dest: ./WebsocketsChat
+            follow: no
+      
+        - name: Build Docker image from Dockerfile
+          docker_image:
+            name: web
+            build:
+              path: ./WebsocketsChat
+            source: build
+        
+        - name: Recursively remove project directory
+          file:
+            path: ./WebsocketsChat
+            state: absent
+
+        - name: Running the container
+          docker_container:
+            name: golangapp
+            image: web:latest
+            state: started
+            ports:
+              - "5000:5000"
+            
+        - name: Check if container is running
+          shell: docker ps
+          register: containerState
+        
+        - debug: msg="{{ containerState.stdout }}"
