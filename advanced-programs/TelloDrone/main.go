@@ -44,37 +44,38 @@ func handleKeyboardInput(drone *tello.Driver) func(interface{}) {
 	return func(data interface{}) {
 		key := data.(keyboard.KeyEvent).Key
 
-		if key == keyboard.A {
+		switch key {
+		case keyboard.A:
 			fmt.Println("Going left.")
 			drone.Left(intensity)
-		} else if key == keyboard.D {
+		case keyboard.D:
 			fmt.Println("Going right.")
 			drone.Right(intensity)
-		} else if key == keyboard.W {
+		case keyboard.W:
 			fmt.Println("Going up.")
 			drone.Up(intensity)
-		} else if key == keyboard.S {
+		case keyboard.S:
 			fmt.Println("Going down.")
 			drone.Down(intensity)
-		} else if key == keyboard.U {
+		case keyboard.U:
 			fmt.Println("Going forward.")
 			drone.Forward(intensity)
-		} else if key == keyboard.J {
+		case keyboard.J:
 			fmt.Println("Going backward.")
 			drone.Backward(intensity)
-		} else if key == keyboard.K {
+		case keyboard.K:
 			fmt.Println("Rotating counter-clockwise.")
 			drone.CounterClockwise(intensity)
-		} else if key == keyboard.H {
+		case keyboard.H:
 			fmt.Println("Rotating clockwise.")
 			drone.Clockwise(intensity)
-		} else if key == keyboard.L {
+		case keyboard.L:
 			fmt.Println("Landing drone")
 			drone.Land()
-		} else if key == keyboard.T {
+		case keyboard.T:
 			fmt.Println("Take off drone")
 			drone.TakeOff()
-		} else {
+		default:
 			resetDronePostion(drone)
 		}
 	}
