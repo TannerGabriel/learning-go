@@ -6,11 +6,6 @@ import (
 	"gopkg.in/olahol/melody.v1"
 )
 
-type Message struct {
-	Username string `json:"username"`
-	Content  string `json:"content"`
-}
-
 func main() {
 	r := gin.Default()
 	m := melody.New()
