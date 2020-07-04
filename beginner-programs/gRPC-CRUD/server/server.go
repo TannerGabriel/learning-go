@@ -80,6 +80,49 @@ func (*server) ReadBlog(ctx context.Context, request *pb.ReadBlogRequest) (*pb.R
 		},
 	}, nil
 }
+
+func (*server) UpdateBlog(ctx context.Context, request *pb.UpdateBlogRequest) (*pb.UpdateBlogResponse, error) {
+	blog := request.GetBlog()
+	blogID := request.BlogId
+
+	oid, _ := primitive.ObjectIDFromHex(blogID)
+
+	update := bson.M{
+		"authord_id": blog.GetAuthorId(),
+		"title":      blog.GetTitle(),
+		"content":    blog.GetContent(),
+	}
+
+	filter := bson.M{"_id": oid}
+
+	Collection.FindOneAndUpdate(ctx, filter, bson.M{"$set": update}, options.FindOneAndUpdate().SetReturnDocument(1))
+
+	return &pb.UpdateBlogResponse{
+		Blog: &pb.Blog{
+			Id:       oid.Hex(),
+			AuthorId: blog.GetAuthorId(),
+			Title:    blog.GetTitle(),
+			Content:  blog.GetContent(),
+		},
+	}, nil
+}
+
+func (*server) DeleteBlog(ctx context.Context, request *pb.DeleteBlogRequest) (*pb.DeleteBlogResponse, error) {
+	oid, err := primitive.ObjectIDFromHex(request.BlogId)
+	if err != nil {
+		return nil, status.Errorf(codes.InvalidArgument, fmt.Sprintf("Could not convert to ObjectId: %v", err))
+	}
+
+	_, err = Collection.DeleteOne(ctx, bson.M{"_id": oid})
+	if err != nil {
+		return nil, status.Errorf(codes.NotFound, fmt.Sprintf("Could not find/delete blog with id %s: %v", request.BlogId, err))
+	}
+
+	return &pb.DeleteBlogResponse{
+		Status: true,
+	}, nil
+}
+
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
