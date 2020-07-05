@@ -42,8 +42,6 @@ var createCmd = &cobra.Command{
 
 		if err != nil {
 			panic(err)
-		} else {
-			fmt.Println("Client started")
 		}
 
 		defer s.Close()
