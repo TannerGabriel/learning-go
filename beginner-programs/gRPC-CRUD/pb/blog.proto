@@ -1,0 +1,50 @@
+syntax = "proto3";
+package blog;
+option go_package = "pb";
+
+message Blog {
+    string id = 1;
+    string author_id = 2;
+    string title = 3;
+    string content = 4;
+}
+
+message CreateBlogRequest {
+    Blog blog = 1;
+}
+
+message CreateBlogResponse {
+    Blog blog = 1;
+}
+
+message ReadBlogRequest {
+    string blog_id = 1;
+}
+
+message ReadBlogResponse {
+    Blog blog = 1;
+}
+
+message UpdateBlogRequest {
+    string blog_id = 1;
+    Blog blog = 2;
+}
+
+message UpdateBlogResponse {
+    Blog blog = 1;
+}
+
+message DeleteBlogRequest {
+    string blog_id = 1;
+}
+
+message DeleteBlogResponse {
+    bool status = 1;
+}
+
+service BlogService {
+    rpc CreateBlog(CreateBlogRequest) returns (CreateBlogResponse);
+    rpc ReadBlog(ReadBlogRequest) returns (ReadBlogResponse);
+    rpc UpdateBlog(UpdateBlogRequest) returns (UpdateBlogResponse);
+    rpc DeleteBlog(DeleteBlogRequest) returns (DeleteBlogResponse);
+}
