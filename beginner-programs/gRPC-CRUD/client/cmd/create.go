@@ -38,7 +38,6 @@ var createCmd = &cobra.Command{
 	Short: "Creating a new Blog post in the database",
 	Long:  `Creating a new Blog post in the database`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(*createBlogParams.Title)
 		s, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
 		if err != nil {
