@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/tannergabriel/learning-go/beginner-programs/gRPC-CRUD/client/cmd"
 	"github.com/tannergabriel/learning-go/beginner-programs/gRPC-CRUD/pb"
 	"google.golang.org/grpc"
 )
 
 func main() {
+	cmd.Execute()
+
 	s, err := grpc.Dial("localhost:50051", grpc.WithInsecure())
 
 	if err != nil {
