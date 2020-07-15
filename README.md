@@ -110,6 +110,7 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 * [Todo List](beginner-programs/Todo-List)
 * [Webscraper](beginner-programs/WebScraper)
 * [Sending an Email over SMTP](beginner-programs/SendEmail)
+* [GRPC MongoDB Cobra CRUD application](beginner-programs/gRPC-CRUD)
 
 ## Advanced Programs
 

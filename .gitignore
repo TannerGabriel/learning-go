@@ -15,3 +15,5 @@
 glide.lock
 
 tmp/
+
+.idea
