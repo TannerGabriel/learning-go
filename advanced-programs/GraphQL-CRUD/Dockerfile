@@ -3,7 +3,7 @@ FROM golang:latest
 # Set the Current Working Directory inside the container
 WORKDIR /app
 
-RUN GO111MODULE=on
+RUN export GO111MODULE=on
 
 # Copy go mod and sum files
 COPY go.mod go.sum ./
