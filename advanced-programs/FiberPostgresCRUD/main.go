@@ -74,12 +74,19 @@ func createTable() {
 }
 
 func main() {
+	app := Setup()
+	app.Listen(3000)
+
+	defer database.DBConn.Close()
+}
+
+// Setup fiber app and database
+func Setup() *fiber.App {
 	app := fiber.New()
 	initDatabase()
 	createTable()
 
 	setupRoutes(app)
-	app.Listen(3000)
 
-	defer database.DBConn.Close()
+	return app
 }

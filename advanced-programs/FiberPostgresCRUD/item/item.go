@@ -1,6 +1,8 @@
 package item
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -9,9 +11,9 @@ import (
 
 type Item struct {
 	gorm.Model
-	Title  string `json:"title"`
-	Owner  string `json:"owner"`
-	Rating int    `json:"rating"`
+	Title  string `json:"Title"`
+	Owner  string `json:"Owner"`
+	Rating int    `json:"Rating"`
 }
 
 func GetItems(c *fiber.Ctx) {
@@ -34,6 +36,7 @@ func NewItem(c *fiber.Ctx) {
 
 	item := new(Item)
 	if err := c.BodyParser(item); err != nil {
+		fmt.Println(err)
 		c.Status(503).Send(err)
 		return
 	}
