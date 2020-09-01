@@ -17,8 +17,8 @@ func TestMergeSort(t *testing.T) {
 	array2 := make(sort.IntSlice, len(array1))
 
 	copy(array2, array1)
-	n := len(array1); 
-    radixsort(array1, n); 
+	n := len(array1)
+	radixsort(array1, n)
 	array2.Sort()
 
 	for i := range array1 {

@@ -14,7 +14,7 @@ func sieveOfEratosthenes(maxNumber int) []int {
 	var primes []int
 
 	// Loop until max number
-	for num := 2; num <= maxNumber; num ++ {
+	for num := 2; num <= maxNumber; num++ {
 		if isPrime[num] == true {
 			// Save prime number in array
 			primes = append(primes, num)

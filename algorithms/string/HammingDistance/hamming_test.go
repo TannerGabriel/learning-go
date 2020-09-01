@@ -10,7 +10,7 @@ func TestHammingDistance(t *testing.T) {
 		k    string
 		want int
 	}{
-		{"a", "a", 0}, {"abc", "azf", 2}, {"1011101", "1001001", 2}, 
+		{"a", "a", 0}, {"abc", "azf", 2}, {"1011101", "1001001", 2},
 	}
 
 	for _, d := range data {

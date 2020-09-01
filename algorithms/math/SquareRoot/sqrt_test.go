@@ -18,4 +18,3 @@ func TestSqrt(t *testing.T) {
 		}
 	}
 }
-

@@ -7,7 +7,7 @@ import (
 func TestIsPascalTriangle(t *testing.T) {
 	t.Run("PascalTraingle of 1", func(t *testing.T) {
 		got := pascalTriangle(1)
-		want := [][]int{  
+		want := [][]int{
 			{1},
 		}
 
@@ -20,12 +20,12 @@ func TestIsPascalTriangle(t *testing.T) {
 				t.Errorf("Error")
 			}
 		}
-		
+
 	})
 
 	t.Run("PascalTraingle of 2", func(t *testing.T) {
 		got := pascalTriangle(2)
-		want := [][]int{  
+		want := [][]int{
 			{1},
 			{1, 1},
 		}
@@ -39,16 +39,16 @@ func TestIsPascalTriangle(t *testing.T) {
 				t.Errorf("Error")
 			}
 		}
-		
+
 	})
 
 	t.Run("PascalTraingle of 5", func(t *testing.T) {
 		got := pascalTriangle(5)
-		want := [][]int{  
+		want := [][]int{
 			{1},
 			{1, 1},
 			{1, 2, 1},
-			{1, 3, 3, 1}, 
+			{1, 3, 3, 1},
 			{1, 4, 6, 4, 1},
 		}
 
@@ -61,20 +61,20 @@ func TestIsPascalTriangle(t *testing.T) {
 				t.Errorf("Error")
 			}
 		}
-		
+
 	})
 }
 
 func Equal(a, b []int) bool {
-    if len(a) != len(b) {
-        return false
+	if len(a) != len(b) {
+		return false
 	}
-	
-    for i, v := range a {
-        if v != b[i] {
-            return false
-        }
+
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
 	}
-	
-    return true
+
+	return true
 }
