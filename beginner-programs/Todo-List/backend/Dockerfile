@@ -1,4 +1,4 @@
-FROM golang:latest AS builder
+FROM golang:1.15.0 AS builder
 
 RUN go get github.com/gorilla/mux 
 RUN go get go.mongodb.org/mongo-driver/bson 

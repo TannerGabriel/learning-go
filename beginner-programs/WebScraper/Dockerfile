@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:1.15.0
 
 RUN go get github.com/gocolly/colly
 
