@@ -33,7 +33,7 @@ export default {
   data: function () {
     return {
       todos: [],
-      baseURL: `http://${process.env.VUE_APP_API_URL}:3000/` || 'http://localhost:3000/' 
+      baseURL: `http://${process.env.VUE_APP_API_URL || 'localhost'}:3000/`
     }
   },
   beforeMount(){

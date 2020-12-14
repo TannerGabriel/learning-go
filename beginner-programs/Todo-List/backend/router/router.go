@@ -1,7 +1,7 @@
 package router
 
 import (
-	"../middleware"
+	"github.com/tannergabriel/learning-go/beginner-programs/todo-list/backend/middleware"
 	"github.com/gorilla/mux"
 )
 

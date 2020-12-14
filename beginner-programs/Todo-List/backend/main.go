@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"./router"
+	"github.com/tannergabriel/learning-go/beginner-programs/todo-list/backend/router"
 )
 
 func main() {

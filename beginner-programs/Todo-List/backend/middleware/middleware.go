@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	"../models"
+	"github.com/tannergabriel/learning-go/beginner-programs/todo-list/backend/models"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 
