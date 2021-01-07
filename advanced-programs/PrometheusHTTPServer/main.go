@@ -25,7 +25,7 @@ func (rw *responseWriter) WriteHeader(code int) {
 	rw.ResponseWriter.WriteHeader(code)
 }
 
-var getCallCounter = prometheus.NewCounterVec(
+var totalRequests = prometheus.NewCounterVec(
 	prometheus.CounterOpts{
 		Name: "http_requests_total",
 		Help: "Number of get requests.",
@@ -52,7 +52,7 @@ func prometheusMiddleware(next http.Handler) http.Handler {
 		path, _ := route.GetPathTemplate()
 
 		defer func() {
-			getCallCounter.WithLabelValues(path).Inc()
+			totalRequests.WithLabelValues(path).Inc()
 		}()
 
 		timer := prometheus.NewTimer(httpDuration.WithLabelValues(path))
@@ -68,7 +68,7 @@ func prometheusMiddleware(next http.Handler) http.Handler {
 }
 
 func init() {
-	prometheus.Register(getCallCounter)
+	prometheus.Register(totalRequests)
 	prometheus.Register(responseStatus)
 	prometheus.Register(httpDuration)
 }
