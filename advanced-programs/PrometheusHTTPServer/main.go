@@ -51,17 +51,14 @@ func prometheusMiddleware(next http.Handler) http.Handler {
 		route := mux.CurrentRoute(r)
 		path, _ := route.GetPathTemplate()
 
-		defer func() {
-			totalRequests.WithLabelValues(path).Inc()
-		}()
-
 		timer := prometheus.NewTimer(httpDuration.WithLabelValues(path))
 		rw := NewResponseWriter(w)
 		next.ServeHTTP(rw, r)
 
 		statusCode := rw.statusCode
+
 		responseStatus.WithLabelValues(strconv.Itoa(statusCode)).Inc()
-		log.Printf("<-- %d %s", statusCode, http.StatusText(statusCode))
+		totalRequests.WithLabelValues(path).Inc()
 
 		timer.ObserveDuration()
 	})
