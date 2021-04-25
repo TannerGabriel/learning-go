@@ -119,6 +119,7 @@ Learning Golang provides hand-on examples, sample algorithm implementations, and
 * [Grafana Sensor Visualization](advanced-programs/GrafanaSensorVisualization)
 * [GraphQL-CRUD](advanced-programs/GraphQL-CRUD)
 * [Websockets Chat](advanced-programs/WebsocketsChat)
+* [Prometheus HTTP Server](advanced-programs/PrometheusHTTPServer)
 
 
 ## Author
