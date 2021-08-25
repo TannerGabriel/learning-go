@@ -1,23 +1,9 @@
 version: '3.1'
 
 services:
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    volumes:
-      - grafana-storage:/var/lib/grafana
-  golang:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: golang
-    restart: always
-    ports:
-      - '9000:9000'
   prometheus:
-    image: prom/prometheus:v2.24.0
+    image: prom/prometheus:latest
+    container_name: prometheus
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -29,7 +15,28 @@ services:
     ports:
       - 9090:9090
     restart: always
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_AUTH_DISABLE_LOGIN_FORM=false
+      - GF_AUTH_ANONYMOUS_ENABLED=false
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    ports:
+      - 3000:3000
+  golang:
+    container_name: golang
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: golang
+    restart: always
+    ports:
+      - 8080:8080
 
 volumes:
-  grafana-storage:
+  grafana_data:
   prometheus_data:

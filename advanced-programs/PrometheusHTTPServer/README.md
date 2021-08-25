@@ -19,13 +19,15 @@ docker-compose up -d
 
 ### Generating load on HTTP Server
 
-You can either generate load manually by visiting the HTTP page on localhost:9000 or generate load using some load generator. I use [Hey](https://github.com/rakyll/hey), which is an easy to use command-line tool.
+You can either generate load manually by visiting the HTTP page on localhost:8080 or generate load using some load generator. I use [Hey](https://github.com/rakyll/hey), which is an easy to use command-line tool.
 
 ```
-hey -z 5m -q 5 -m GET -H "Accept: text/html" http://127.0.0.1:9000
+hey -z 5m -q 5 -m GET -H "Accept: text/html" http://127.0.0.1:8080
+
+hey -n 10000 -c 100 -m GET -H "Accept: text/html" http://127.0.0.1:8080
 ```
 
-You can now see the metrics of your application on localhost:9000/Prometheus.
+You can now see the metrics of your application on http://localhost:8080/metrics.
 
 ### Importing Grafana dashboard
 

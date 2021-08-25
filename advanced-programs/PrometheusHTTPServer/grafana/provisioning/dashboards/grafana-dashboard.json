@@ -115,7 +115,7 @@
     },
     {
       "aliasColors": {
-        "response_status{instance=\"golang:9000\", job=\"golang\", status=\"304\"}": "red"
+        "response_status{instance=\"golang:8080\", job=\"golang\", status=\"304\"}": "red"
       },
       "bars": true,
       "dashLength": 10,
