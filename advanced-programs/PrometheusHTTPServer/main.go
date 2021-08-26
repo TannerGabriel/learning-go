@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+	"strconv"
+
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"log"
-	"net/http"
-	"strconv"
 )
 
 type responseWriter struct {
@@ -75,12 +76,12 @@ func main() {
 	router.Use(prometheusMiddleware)
 
 	// Prometheus endpoint
-	router.Path("/prometheus").Handler(promhttp.Handler())
+	router.Path("/metrics").Handler(promhttp.Handler())
 
 	// Serving static files
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
-	fmt.Println("Serving requests on port 9000")
-	err := http.ListenAndServe(":9000", router)
+	fmt.Println("Serving requests on port 8080")
+	err := http.ListenAndServe(":8080", router)
 	log.Fatal(err)
 }
