@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestIsValidEmail(t *testing.T) {
+func TestIsValidEmail_d2603fb18f(t *testing.T) {
 	tests := []struct {
 		name  string
 		email string
@@ -22,7 +22,7 @@ func TestIsValidEmail(t *testing.T) {
 			if got := IsValidEmail(tt.email); got != tt.want {
 				t.Errorf("IsValidEmail() = %v, want %v", got, tt.want)
 			} else {
-				log.Printf("Success: TestIsValidEmail with case '%s'\n", tt.name)
+				log.Printf("Success: TestIsValidEmail_d2603fb18f with case '%s'\n", tt.name)
 			}
 		})
 	}
