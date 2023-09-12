@@ -1,38 +1,37 @@
 package Validator
 
 import (
+	"log"
 	"testing"
 )
 
-func TestIsValidEmail_d2603fb18f(t *testing.T) {
-	t.Run("valid email", func(t *testing.T) {
-		email := "test@example.com"
-		if !IsValidEmail(email) {
-			t.Errorf("Expected true for email '%s', got false", email)
-		}
-	})
+func TestIsValidEmail(t *testing.T) {
+	tests := []struct {
+		name  string
+		email string
+		want  bool
+	}{
+		{"valid email", "test@example.com", true},
+		{"invalid email", "test@example", false},
+		{"empty email", "", false},
+		{"long email", "test@example.com" + repeat("long", 20), false},
+	}
 
-	t.Run("invalid email", func(t *testing.T) {
-		email := "test@example"
-		if IsValidEmail(email) {
-			t.Errorf("Expected false for email '%s', got true", email)
-		}
-	})
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := IsValidEmail(tt.email); got != tt.want {
+				t.Errorf("IsValidEmail() = %v, want %v", got, tt.want)
+			} else {
+				log.Printf("Success: TestIsValidEmail with case '%s'\n", tt.name)
+			}
+		})
+	}
+}
 
-	t.Run("empty email", func(t *testing.T) {
-		email := ""
-		if IsValidEmail(email) {
-			t.Errorf("Expected false for email '%s', got true", email)
-		}
-	})
-
-	t.Run("long email", func(t *testing.T) {
-		email := "test@example.com"
-		for i := 0; i < 20; i++ {
-			email += "long"
-		}
-		if IsValidEmail(email) {
-			t.Errorf("Expected false for email '%s', got true", email)
-		}
-	})
+func repeat(s string, n int) string {
+	var result string
+	for i := 0; i < n; i++ {
+		result += s
+	}
+	return result
 }
