@@ -15,6 +15,16 @@ func TestIsValidEmail_d2603fb18f(t *testing.T) {
 		{"invalid email", "test@example", false},
 		{"empty email", "", false},
 		{"long email", "test@example.com" + repeat("long", 20), false},
+		{"invalid email with no domain", "test", false},
+		{"invalid email with no '@'", "test.com", false},
+		{"invalid email with no name", ".com", false},
+		{"invalid email with non-ascii characters", "адрес@пример.рф", false},
+		{"invalid email with space before", " space_before@test.com", false},
+		{"invalid email with space between", "space between@test.com", false},
+		{"invalid email with newline before", "\nnewlinebefore@test.com", false},
+		{"invalid email with newline between", "newline\nbetween@test.com", false},
+		{"invalid email with dot at the end", "test@test.com.", false},
+		{"invalid email with excessive length", "asyouallcanseethisemailaddressexceedsthemaximumnumberofcharactersallowedtobeintheemailaddresswhichisnomorethatn254accordingtovariousrfcokaycanistopnowornotyetnoineedmorecharacterstoadd@i.really.cannot.thinkof.what.else.to.put.into.this.invalid.address.net", false},
 	}
 
 	for _, tt := range tests {
