@@ -20,7 +20,7 @@ func TestIsValidEmail_d2603fb18f(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := IsValidEmail(tt.email); got != tt.want {
-				t.Errorf("IsValidEmail() = %v, want %v", got, tt.want)
+				t.Errorf("IsValidEmail(%s) = %v, want %v", tt.email, got, tt.want)
 			} else {
 				log.Printf("Success: TestIsValidEmail_d2603fb18f with case '%s'\n", tt.name)
 			}
