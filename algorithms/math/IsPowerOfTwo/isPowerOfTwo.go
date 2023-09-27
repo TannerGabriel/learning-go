@@ -19,6 +19,9 @@ func isPowerOfTwo(num int) bool {
 }
 
 func mod(a, b int) int {
+	if b == 0 {
+		return 0
+	}
 	m := a % b
 	if a < 0 && b < 0 {
 		m -= b

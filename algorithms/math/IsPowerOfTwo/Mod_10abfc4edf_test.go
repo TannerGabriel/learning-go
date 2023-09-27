@@ -18,7 +18,7 @@ func TestMod_10abfc4edf(t *testing.T) {
     for _, tt := range tests {
         got := mod(tt.a, tt.b)
         if got != tt.want {
-            t.Errorf("mod(%d, %d) = %d; want %d", tt.a, tt.b, got, tt.want)
+            t.Errorf("Fail: mod(%d, %d) = %d; want %d", tt.a, tt.b, got, tt.want)
         } else {
             t.Logf("Success: mod(%d, %d) = %d", tt.a, tt.b, got)
         }

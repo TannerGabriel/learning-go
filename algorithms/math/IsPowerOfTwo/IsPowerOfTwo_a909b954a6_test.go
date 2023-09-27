@@ -4,6 +4,7 @@ package IsPowerOfTwo
 
 import (
 	"testing"
+	"fmt"
 )
 
 func TestIsPowerOfTwo_a909b954a6(t *testing.T) {
@@ -20,7 +21,7 @@ func TestIsPowerOfTwo_a909b954a6(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		t.Run("Testing number "+string(c.num), func(t *testing.T) {
+		t.Run("Testing number "+fmt.Sprint(c.num), func(t *testing.T) {
 			got := isPowerOfTwo(c.num)
 			if got != c.expected {
 				t.Errorf("isPowerOfTwo(%v) == %v, expected %v", c.num, got, c.expected)
